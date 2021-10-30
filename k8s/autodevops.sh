@@ -27,30 +27,21 @@ APIURL=$(kubectl cluster-info | grep -E 'Kubernetes master|Kubernetes control pl
 checkrc $? ${STEP}
 echo "API URL => ${APIURL}"
 
-
-NAMESPACE=gitlab-namespace
-echo "#-----------------------"
-STEP="kubectl apply account"
-echo ${STEP}
-kubectl create namespace ${NAMESPACE} || true
-kubectl apply -f gitlab-sa.yaml
-checkrc $? ${STEP}
-
 echo "#-----------------------"
 STEP="Get Secret"
 echo ${STEP}
-SECRET=$(kubectl -n ${NAMESPACE} get secret | grep ^gitlab-sa | awk '{print $1}')
+SECRET=$(kubectl get secrets | grep ^default-token-* | awk '{print $1}')
 checkrc $? ${STEP}
 echo "Secret => ${SECRET}"
 
 echo "#-----------------------"
 STEP="Get CA Certificate"
 echo ${STEP}
-kubectl -n ${NAMESPACE} get secret $SECRET -o jsonpath="{['data']['ca\.crt']}" | base64 --decode
+kubectl get secrets $SECRET -o jsonpath="{['data']['ca\.crt']}" | base64 --decode
 
 echo "#-----------------------"
 STEP="Get Token from Secret"
-TOKEN=$(kubectl -n ${NAMESPACE} describe secret ${SECRET} | grep '^token')
+TOKEN=$(kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep gitlab | awk '{print $1}'))
 checkrc $? ${STEP}
 echo "Token => ${TOKEN}"
 
