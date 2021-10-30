@@ -1,9 +1,7 @@
 # gitlab
 gitlab deployment with docker-compose and kubernetes<br/>
 <br/>
-gitlab deployment in kubernetes<br/>
-<br/>
-Requirements<br/>
+Requirements:<br/>
 Kubernetes cluster<br/>
 Kubectl installed and configured on control machine<br/>
 <br/>
