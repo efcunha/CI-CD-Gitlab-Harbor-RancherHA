@@ -5,13 +5,21 @@ Requerimentos:<br/>
 Kubernetes cluster<br/>
 Kubectl instalado e configurado nos control machine<br/>
 <br/>
-### Utilizando
+### Utilizando script para instalação:
 <br/>
 <pre>
-kubectl apply -f ./
+./install.sh
+</pre>
+<br/>
+### Utilizando script para desinstalação:
+<br/>
+<pre>
+./uninstall.sh
 </pre>
 <br/>
 # Abilitando Active Directory
+# Altere os campos com os valores de conexão de seu Actibe Directory
+# E adicione no final do arquivo 01-secrets.yml
 <br/>
 <pre>
 gitlab_rails['ldap_enabled'] = true
