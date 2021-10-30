@@ -5,7 +5,7 @@ Requerimentos:<br/>
 Kubernetes cluster<br/>
 Kubectl instalado e configurado nos control machine<br/>
 <br/>
-### usage
+### Utilizando
 <br/>
 <pre>
 kubectl apply -f ./
