@@ -1,0 +1,10 @@
+########################################
+# Gitlab namespace template
+#######################################
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gitlab-namespace
+  labels:
+    app.kubernetes.io/name: gitlab-namespace
+    app.kubernetes.io/part-of: gitlab-namespace

@@ -1,0 +1,53 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgresbackup-claim
+  namespace: gitlab-namespace
+spec:
+  storageClassName: managed-nfs-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 60Gi
+
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: gitlab-psql-backup
+  namespace: gitlab-namespace
+spec:
+  # mind time zone UTC
+  schedule: "25 22 * * *"
+  startingDeadlineSeconds: 8
+  concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 7
+  failedJobsHistoryLimit: 7
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: gitlab-psql-backup
+              image: postgres:latest
+              args:
+              - /bin/bash
+              - -c
+              - pg_dump -U root -f /home/gitlab_database_backup.$(date '+%d%m%Y-%H:%M:%S').sql gitlab_database
+              - find /home -type f -mtime +60 -exec rm -f {} \;
+              env:
+              - name: PGPASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: gitlab-passwords
+                    key: root_db_password
+              volumeMounts:
+                - name: postgres-dump
+                  mountPath: /home
+          restartPolicy: OnFailure
+          volumes:
+             - name: postgres-dump
+               persistentVolumeClaim:
+                 claimName: postgresbackup-claim 

@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gitlab
+  namespace: gitlab-namespace
+  labels:
+    app: gitlab
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.tls.certresolver: default    
+spec:
+  rules:
+    - host: gitlab.tcemt.tc.br
+      http:
+        paths:
+          - backend:
+              serviceName: gitlab-cluster-ip-service
+              servicePort: 80
+            path: /
+  tls:
+    - hosts:
+        - gitlab.tcemt.tc.br
+      secretName: traefik-cert
+

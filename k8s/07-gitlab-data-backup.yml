@@ -1,0 +1,95 @@
+apiVersion: batch/v2alpha1
+kind: CronJob
+metadata:
+  name: gitlab-data-backup
+  namespace: gitlab-namespace
+spec:
+  # mind time zone UTC
+  schedule: "25 23 * * *"
+  concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 7
+  failedJobsHistoryLimit: 7
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: gitlab-data-backup
+              image: rdiff-backup:latest
+              imagePullPolicy: Always
+              args:
+              - /bin/sh
+              - -c
+              - rdiff-backup $SOURCE_DIR $TARGET_DIR/gitlab && rdiff-backup $SOURCE_DIR_CREDENTIALS $TARGET_DIR/secrets_gitlab && rdiff-backup --remove-older-than 4W --force $TARGET_DIR/gitlab
+              env:
+                - name: SOURCE_DIR
+                  value: /var/opt/gitlab
+                - name: SOURCE_DIR_CREDENTIALS
+                  value: /etc/gitlab
+                - name: TARGET_DIR
+                  value: /home
+              volumeMounts:
+                - name: gitlab-data
+                  mountPath: /var/opt/gitlab
+                  readOnly: true
+                - name: gitlab-credentials
+                  mountPath: /etc/gitlab
+                  readOnly: true
+                - name: target
+                  mountPath: /home/
+          restartPolicy: OnFailure
+          volumes:
+             - name: gitlab-data
+               persistentVolumeClaim:
+                 claimName: gitlab-claim
+             - name: gitlab-credentials
+               persistentVolumeClaim:
+                 claimName: gitlab-credentials-claim
+             - name: target
+               persistentVolumeClaim:
+                 claimName: target-claim
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: target-claim
+  namespace: gitlab-namespace
+spec:
+  storageClassName: managed-nfs-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200Gi
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: gitlab-claim
+  namespace: gitlab-namespace
+spec:
+  storageClassName: managed-nfs-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: gitlab-credentials-claim
+  namespace: gitlab-namespace
+spec:
+  storageClassName: managed-nfs-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
