@@ -11,15 +11,22 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls.certresolver: default    
 spec:
   rules:
-    - host: gitlab.tcemt.tc.br
+    - host: gitlab.<domino.com;br>
       http:
         paths:
           - backend:
               serviceName: gitlab-cluster-ip-service
               servicePort: 80
             path: /
+    - host: registry.<domino.com;br
+      http:
+        paths:
+          - backend:
+              serviceName: gitlab-registry-service
+              servicePort: 4567
+            path: /
   tls:
     - hosts:
-        - gitlab.tcemt.tc.br
+        - gitlab.<domino.com;br
+        - registry.<domino.com;br
       secretName: traefik-cert
-
