@@ -1,5 +1,5 @@
 # GITLAB
-gitlab deployment with docker-compose and kubernetes<br/>
+Gitlab deployment with docker-compose and kubernetes<br/>
 <br/>
 Requirements:<br/>
 Kubernetes cluster<br/>
