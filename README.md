@@ -1,5 +1,5 @@
 # GITLAB
-Gitlab implantação com docker-compose e kubernetes<br/>
+Gitlab implantação no Rancher HA e kubernetes<br/>
 <br/>
 Requerimentos:<br/>
 Kubernetes cluster<br/>
