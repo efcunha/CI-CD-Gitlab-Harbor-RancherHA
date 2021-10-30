@@ -36,7 +36,7 @@ spec:
   ports:
   - name: http
     protocol: TCP
-    port: 80 #port in the service - any outside object accesses through this port
+    port: 80
     targetPort: 80
     nodePort: 31800  
 ---
@@ -56,7 +56,7 @@ spec:
   ports:
   - name: registry
     protocol: TCP
-    port: 4567 #port in the service - any outside object accesses through this port
+    port: 4567 
     targetPort: 4567
     nodePort: 31700  
 
@@ -113,7 +113,7 @@ spec:
         tier: frontend
     spec:
       containers:
-        - image: gitlab/gitlab-ee:latest 
+        - image: gitlab/gitlab-ce:latest 
           name: gitlab
           ports:
             - name: registry
@@ -129,7 +129,7 @@ spec:
               mountPath: /etc/gitlab
             - name: config
               mountPath: /etc/gitlab/gitlab.rb
-              subPath: gitlab.rb       #stores all the configuration in a path gitlab_configuration on the nfs
+              subPath: gitlab.rb      
       volumes:
         - name: gitlab-data
           persistentVolumeClaim:

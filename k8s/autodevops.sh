@@ -20,6 +20,14 @@ if [[ "${RET}" -ne "yes" ]]; then
   exit 1
 fi
 
+
+echo "#-----------------------"
+STEP="kubectl apply account"
+echo ${STEP}
+kubectl apply -f 05-gitlab-sa.yaml
+checkrc $? ${STEP}
+
+
 echo "#-----------------------"
 STEP="kubectl Api Url"
 echo ${STEP}
