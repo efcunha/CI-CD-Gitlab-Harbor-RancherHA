@@ -36,11 +36,11 @@ gitlab_rails['ldap_servers'] = {
   }
 </pre>
 <br/>
+<pre>
 kubectl cluster-info | grep -E 'Kubernetes master|Kubernetes control plane' | awk '/http/ {print $NF}'<br/>
 kubectl get secret <secret name> -o jsonpath="{['data']['ca\.crt']}" | base64 --decode<br/>
 kubectl get secrets<br/>
 kubectl get secret default-token-zzwsp -o jsonpath="{['data']['ca\.crt']}" | base64 --decode<br/>
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep gitlab | awk '{print $1}')<br/>
-Requirements<br/>
-none<br/>
+</pre>
 <br/>
