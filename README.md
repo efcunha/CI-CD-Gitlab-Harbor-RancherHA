@@ -1,9 +1,9 @@
 # GITLAB
-Gitlab deployment with docker-compose and kubernetes<br/>
+Gitlab implantação com docker-compose e kubernetes<br/>
 <br/>
-Requirements:<br/>
+Requerimentos:<br/>
 Kubernetes cluster<br/>
-Kubectl installed and configured on control machine<br/>
+Kubectl instalado e configurado nos control machine<br/>
 <br/>
 ### usage
 <br/>
@@ -11,7 +11,7 @@ Kubectl installed and configured on control machine<br/>
 kubectl apply -f ./
 </pre>
 <br/>
-# enabling active directory
+# Abilitando Active Directory
 <br/>
 <pre>
 gitlab_rails['ldap_enabled'] = true
