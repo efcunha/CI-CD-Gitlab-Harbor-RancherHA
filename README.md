@@ -84,34 +84,41 @@ gitlab_rails['ldap_servers'] = {
 
 # Examplo
 ```
-cdelaitre@ubuntu1 ~/workspace/gitlab-rancher-kubernetes (master) $ ./autodevops.sh
-
+ubuntu@DESKTOP-9LDMSRO:~/Gitlab-Rancher-Kubernetes/k8s$ ./autodevops.sh
 #-----------------------
 kubectl check configuration
 #-----------------------
 kubectl Api Url
-API URL => https://192.168.56.101/k8s/clusters/c-6qr44
-#-----------------------
-kubectl apply account
-namespace/gitlab-managed-apps created
-serviceaccount/gitlab-sa created
-role.rbac.authorization.k8s.io/gitlab-role created
-rolebinding.rbac.authorization.k8s.io/gitlab-rb created
+API URL => https://rancher.tcemt.tc.br/k8s/clusters/c-bqn4w
 #-----------------------
 Get Secret
-Secret => gitlab-sa-token-q5wmm
+Secret => default-token-zzwsp
 #-----------------------
 Get CA Certificate
 -----BEGIN CERTIFICATE-----
-MIICwjCCAaqgAwIBAgIBADANBgkqhkiG9w0BAQsFADASMRAwDgYDVQQDEwdrdWJl
-LWNhMB4XDTE5MDQxMDEyMTMwOVoXDTI5MDQwNzEyMTMwOVowEjEQMA4GA1UEAxMH
-...
-Gxf0CWcfwx9YKZhGjRvLYjDMslR4/56hOZtmG7Irn8+MKCmWSC2Gft3WkTJukRpM
-AKF0a+Y6onL23copR2uEB7psRGal++TII08QeeCmIXtz4lc9egtKMrFF0+M5BUMN
-W5oimYAS9egkwvdrX/rd/OhfKZdcZO+MkC6YHVH43SAYXC5s9kk=
+MIIC4TCCAcmgAwIBAgIBADANBgkqhkiG9w0BAQsFADASMRAwDgYDVQQDEwdrdWJl
+LWNhMB4XDTIxMTAxNTIyMjYxOFoXDTMxMTAxMzIyMjYxOFowEjEQMA4GA1UEAxMH
+a3ViZS1jYTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAM/RFBWwU7OE
+y7D6SHbdMSdZ8pVAJ5WtKZNGvvLvZv9w4GeyUN6T9BszaVCAKrPC9/7G+7rbTlrk
+90MxeY7jenMqHRiF0GDGorfl1jngavaMIM6fqQKuw2/P9lHYFanUMGN3ga7sLSKw
+4M89l4OoXIX82w5D3wQVpANvE/1X
 -----END CERTIFICATE-----
 #-----------------------
-Token => token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJnaXRsYWItbWFuYWdlZC1hcHBzIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InJ1bm5lci1naXRsYWItcnVubmVyLXRva2VuLTl3cGd6Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6InJ1bm5lci1naXRsYWItcnVubmVyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiN2VlM2IwOTEtNWM2Yy0xMWU5LWJlYjgtMDgwMDI3YWJlZjRlIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmdpdGxhYi1tYW5hZ2VkLWFwcHM6cnVubmVyLWdpdGxhYi1ydW5uZXIifQ.mGgFWyfy9wPnJUfJNLL_XZuPBXJ2u5EZF1MGNb3u8qDVs2Rn7JmMrbLoplDhZJycJ3RdFe_q-fSBzvJvhLeTcjugIKcBHr44-imC8ty_o-QSkHE5kiIG0eFRq6VJVAX1g25DYV7mgV2FyJ8lfLG5fDEQhGUoxD1yDTTjHNQzZc75jBYGuaRhBOsuWsJrZnpHbX9qbTEjfdxzuLWwy4cdU8a8T791Br6ivxVIkz1T5n2bgFWmYoahB3dEoYv5P18GvT7nXxIlJVhhmhcIq8B6mAk7B4Xs_1lsL_3M1isbeZp3Y493G6LcuOokPxdpvPrVLnVCXdh5frqrSg-2tB-82w
+Token => Name:         gitlab-token-7vbww
+Namespace:    kube-system
+Labels:       <none>
+Annotations:  kubernetes.io/service-account.name: gitlab
+              kubernetes.io/service-account.uid: 47d461dc-bf12-454f-ac43-37a6bd786a62
+
+Type:  kubernetes.io/service-account-token
+
+Data
+====
+ca.crt:     1058 bytes
+namespace:  11 bytes
+token:      iNDdkNDYxZGMtYmYxMi00NTRmLWFjNDMtMzdhNmJkNzg2YTYyIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmdpdGxhYiJ9.qJdS-
+irjtnP9Z4r3shgZ5OxgSYkwdPpF-BIcbakAN7KiNJFdP7E6NVbague1DRdxrC2WKig669-rGabarSAIdvNfUisKDx1oaaPUqSoNj9Utk93h_J0tlhP9-JLVdfCL3Fboz
+GdQo2ieY_Y962Ba-XTJJ45yh1G3WVBZ7kCg9tb_C6KAuilUa4OdPDx06YwGhAeFA_BO7_gZdTb50NsUnxHsa0v3qpceoqa4kBp5ab16LRz-sZlTJzYyiHf7MlTRbl13ldzda91TfWKiRIojyRw6K_BxMQ
 #-----------------------
 clusterrolebinding.rbac.authorization.k8s.io/permissive-binding created
 ```
