@@ -43,7 +43,7 @@ O objetivo aqui é fornecer um script para ajudar as pessoas a configurar o clus
 - worker03 172.16.0.29 : Rancher server stable 2.6.x, nfs server (for persistence volume claim)
 - worker04 172.16.0.30 : Rancher server stable 2.6.x, nfs server (for persistence volume claim)
 
-# Comandss
+# Comandos
 
 # Clone o repositorio:
 ```
