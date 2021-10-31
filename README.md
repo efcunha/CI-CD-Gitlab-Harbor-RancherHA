@@ -123,4 +123,3 @@ GdQo2ieY_Y962Ba-XTJJ45yh1G3WVBZ7kCg9tb_C6KAuilUa4OdPDx06YwGhAeFA_BO7_gZdTb50NsUn
 clusterrolebinding.rbac.authorization.k8s.io/permissive-binding created
 ```
 
-## Noticias
