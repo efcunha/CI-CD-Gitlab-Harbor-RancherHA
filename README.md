@@ -36,10 +36,12 @@ O objetivo aqui é fornecer um script para ajudar as pessoas a configurar o clus
 
 # Setup
 
-3 VM Ubuntu 18.04 with Docker 18.06 installed
-- VM1 ubuntu1 192.168.56.11 : GitLab 11.9.6-ce installed (omnibus docker-compose installation)
-- VM2 cluster1 192.168.56.101 : Rancher server stable 2.1.8, nfs server (for persistence volume claim)
-- VM3 cluster2 192.168.56.102 : Rancher agent worker1 node
+3 VM Ubuntu 18.04 with Docker installed
+
+- worker01 172.16.0.27 : Rancher server stable 2.6.x, nfs server (for persistence volume claim)
+- worker02 172.16.0.28 : Rancher server stable 2.6.x, nfs server (for persistence volume claim)
+- worker03 172.16.0.29 : Rancher server stable 2.6.x, nfs server (for persistence volume claim)
+- worker04 172.16.0.30 : Rancher server stable 2.6.x, nfs server (for persistence volume claim)
 
 # Comandss
 
@@ -114,4 +116,4 @@ Token => token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3
 clusterrolebinding.rbac.authorization.k8s.io/permissive-binding created
 ```
 
-## Notice
+## Noticias
