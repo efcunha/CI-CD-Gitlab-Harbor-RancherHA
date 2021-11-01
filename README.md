@@ -50,9 +50,9 @@ O objetivo aqui é fornecer um script para ajudar as pessoas a configurar o clus
 git clone https://github.com/efcunha/Gitlab-Rancher-Kubernetes.git
 cd Gitlab-Rancher-Kubernetes
 ```
-# Abilitando Active Directory
-# Altere os campos com os valores de conexão de seu Actibe Directory
-# E adicione no final do arquivo 01-secrets.yml
+# Habilitando Active Directory
+Altere os campos com os valores de conexão de seu Actibe Directory
+E adicione no final do arquivo 01-secrets.yml
 ```
 gitlab_rails['ldap_enabled'] = true
 gitlab_rails['ldap_servers'] = {
