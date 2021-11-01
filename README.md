@@ -54,24 +54,36 @@ cd Gitlab-Rancher-Kubernetes
 Altere os campos com os valores de conexão de seu Actibe Directory
 E adicione no final do arquivo 01-secrets.yml
 ```
+gitlab_rails['smtp_enable'] = true
+gitlab_rails['smtp_address'] = "smtp.dominio.com.br"
+gitlab_rails['smtp_port'] = 25
+gitlab_rails['smtp_domain'] = "smtp.dominio.com.br"
+gitlab_rails['smtp_tls'] = false;
+gitlab_rails['smtp_openssl_verify_mode'] = 'none'
+gitlab_rails['smtp_enable_starttls_auto'] = false
+gitlab_rails['smtp_ssl'] = false
+gitlab_rails['smtp_force_ssl'] = false
+gitlab_rails['gitlab_email_from'] = 'noreply@dominio.com.br'
+gitlab_rails['gitlab_email_reply_to'] = 'infraestrutura@dominio.com.br'
 gitlab_rails['ldap_enabled'] = true
 gitlab_rails['ldap_servers'] = {
 'main' => {
-  'label' => 'ACTIVE DIRECTORY TEST',
-  'host' =>  'test.activedirectory.com',
-  'port' => 636,
+  'label' => 'GitLab',
+  'host' =>  'ACTIVE DIRECTORY',
+  'port' => 389,
   'uid' => 'sAMAccountName',
-  'encryption' => 'simple_tls',
+  'encryption' => 'plain',
   'verify_certificates' => false,
-  'bind_dn' => 'CN=ad-test,OU=Project,DC=example,DC=ng',
-  'password' => 'AWsd12nT',
+  'bind_dn' => 'apache',
+  'password' => 'Tce321',
   'active_directory' => true,
-  'base' => 'OU=User,DC=example,DC=ng',
-  'group_base' => 'OU=User,DC=example,DC=ng',
-  'user_filter' => 'memberOf=CN=grp-example,OU=Organisation,OU=User,DC=example,DC=ng',
-  'lowercase_usernames' => 'true'
-   }
-  }
+  'base' => 'DC=dominio,DC=gov,DC=br',
+  'group_base' => 'OU=Internet,OU=Grupos,OU=PAI,DC=dominio,DC=gov,DC=br',
+  'admin_group' => 'AcessoDesenvolvimento'
+ }
+}
+gitlab_rails['ldap_sync_worker_cron'] = "30 1 * * *"
+gitlab_rails['ldap_group_sync_worker_cron'] = "0 * * * *"  
 ```
 # Utilizando script para instalação:
 ```
