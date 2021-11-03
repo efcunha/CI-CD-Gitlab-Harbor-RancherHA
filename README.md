@@ -101,7 +101,7 @@ ubuntu@DESKTOP-9LDMSRO:~/Gitlab-Rancher-Kubernetes/k8s$ ./autodevops.sh
 kubectl check configuration
 #-----------------------
 kubectl Api Url
-API URL => https://rancher.<dominio.com.br>/k8s/clusters/c-bqn4w
+API URL => https://rancher.dominio.com.br/k8s/clusters/c-bqn4w
 #-----------------------
 Get Secret
 Secret => default-token-zzwsp
