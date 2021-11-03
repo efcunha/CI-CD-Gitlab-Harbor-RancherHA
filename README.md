@@ -77,8 +77,8 @@ gitlab_rails['ldap_servers'] = {
   'bind_dn' => 'apache',
   'password' => 'Tce321',
   'active_directory' => true,
-  'base' => 'DC=dominio,DC=gov,DC=br',
-  'group_base' => 'OU=Internet,OU=Grupos,OU=PAI,DC=dominio,DC=gov,DC=br',
+  'base' => 'DC=dominio,DC=com,DC=br',
+  'group_base' => 'OU=Internet,OU=Grupos,OU=PAI,DC=dominio,DC=com,DC=br',
   'admin_group' => 'AcessoDesenvolvimento'
  }
 }
