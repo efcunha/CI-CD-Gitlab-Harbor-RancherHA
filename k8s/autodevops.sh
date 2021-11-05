@@ -41,13 +41,8 @@ kubectl get secrets $SECRET -o jsonpath="{['data']['ca\.crt']}" | base64 --decod
 
 echo "#-----------------------"
 STEP="Get Token from Secret"
-TOKEN=$(kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep gitlab | awk '{print $1}'))
+TOKEN=$(kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep default | awk '{print $1}'))
 checkrc $? ${STEP}
 echo "Token => ${TOKEN}"
-
-echo "#-----------------------"
-STEP="Fix clusterrolebinding permissive-binding"
-kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts
-checkrc $? ${STEP}
 
 exit 0
