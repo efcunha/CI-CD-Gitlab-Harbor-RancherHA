@@ -14,8 +14,4 @@ kubectl delete -f k8s/03-service.yml
 kubectl delete -f k8s/02-account.yml
 kubectl delete -f k8s/01-secrets.yml
 
-echo "#-----------------------"
-STEP="Removendo Namespace Gitlab"
-kubectl delete -f k8s/00-namespace.yml
-
 exit 0

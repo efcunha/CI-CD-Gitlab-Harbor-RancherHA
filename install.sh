@@ -18,8 +18,4 @@ kubectl apply -f k8s/05-gitlab.yml
 kubectl apply -f k8s/06-ingress.yml
 kubectl apply -f k8s/07-gitlab-data-backup.yml
 
-echo "#-----------------------"
-STEP="Informações para Conectar Gitlab no Kubernetes"
-./k8s/autodevops.sh*
-
 exit 0

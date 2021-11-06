@@ -23,26 +23,36 @@ fi
 echo "#-----------------------"
 STEP="kubectl Api Url"
 echo ${STEP}
-APIURL=$(kubectl cluster-info | grep -E 'Kubernetes master|Kubernetes control plane' | awk '/http/ {print $NF}')
+kubectl cluster-info | grep -E 'Kubernetes master|Kubernetes control plane' | awk '/http/ {print $NF}'
 checkrc $? ${STEP}
 echo "API URL => ${APIURL}"
 
+
+NAMESPACE=default
 echo "#-----------------------"
-STEP="Get Secret"
+STEP="kubectl apply account"
+kubectl apply -f gitlab-admin-service-account.yaml
 echo ${STEP}
-SECRET=$(kubectl get secrets | grep ^default-token-* | awk '{print $1}')
 checkrc $? ${STEP}
-echo "Secret => ${SECRET}"
 
 echo "#-----------------------"
 STEP="Get CA Certificate"
 echo ${STEP}
-kubectl get secrets $SECRET -o jsonpath="{['data']['ca\.crt']}" | base64 --decode
+kubectl get secret default-token -o jsonpath="{['data']['ca\.crt']}" | base64 --decode
 
 echo "#-----------------------"
 STEP="Get Token from Secret"
-TOKEN=$(kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep default | awk '{print $1}'))
+TOKEN=$(kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep gitlab | awk '{print $1}'))
 checkrc $? ${STEP}
 echo "Token => ${TOKEN}"
+
+echo "#-----------------------"
+STEP="Fix clusterrolebinding permissive-binding"
+kubectl create clusterrolebinding permissive-binding \
+  --clusterrole=cluster-admin \
+  --user=admin \
+  --user=kubelet \
+  --group=system:serviceaccounts
+checkrc $? ${STEP}
 
 exit 0
