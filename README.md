@@ -877,9 +877,9 @@ Em seguida, você atualizará a página da web, que criará uma nova implantaç�
 
 Isso cobre o caso de uso de uma reversão de implantação no caso de uma implantação defeituosa.
 
-Comece fazendo uma pequena alteração no index.htmlarquivo:
+Comece fazendo uma pequena alteração no index.html arquivo:
 
-No GitLab, vá para a visão geral do projeto e abra o index.htmlarquivo.
+No GitLab, vá para a visão geral do projeto e abra o index.html arquivo.
 
 Clique no botão Editar para abrir o editor online.
 
@@ -895,7 +895,9 @@ Altere o conteúdo do arquivo para o seguinte:
 ``` 
 Salve as alterações clicando em Confirmar alterações na parte inferior da página.
 
-Um novo pipeline será criado para implantar as mudanças. No GitLab, vá para CI/CD> Pipelines. 
+Um novo pipeline será criado para implantar as mudanças. 
+
+No GitLab, vá para CI/CD> Pipelines. 
 
 Quando o pipeline for concluído, você pode abrir em um navegador a página da web atualizada que agora mostra Meu site pessoal aprimorado em vez de Meu site pessoal .http://your_server_IP
 
@@ -919,7 +921,7 @@ Neste tutorial, você configurou um pipeline de implantação contínua com GitL
 
 Você criou um pequeno projeto da web que consiste em um arquivo HTML e um Dockerfile. 
 
-Em seguida, você configurou a configuração do .gitlab-ci.ymlpipeline para:
+Em seguida, você configurou a configuração do .gitlab-ci.yml pipeline para:
 
 Crie a imagem Docker.
 
@@ -929,7 +931,9 @@ Efetue login no servidor, obtenha a imagem mais recente, pare o contêiner atual
 
 O GitLab agora implantará a página da web em seu servidor para cada envio para o repositório.
 
-Além disso, você verificou uma implantação no GitLab e em seu servidor. Você também criou uma segunda implantação e voltou para a primeira implantação usando ambientes GitLab, o que demonstra como você lida com implantações defeituosas.
+Além disso, você verificou uma implantação no GitLab e em seu servidor. 
+
+Você também criou uma segunda implantação e voltou para a primeira implantação usando ambientes GitLab, o que demonstra como você lida com implantações defeituosas.
 
 Neste ponto, você automatizou toda a cadeia de implantação. Agora você pode compartilhar alterações de código com mais frequência com o mundo e/ou o cliente. 
 
