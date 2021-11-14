@@ -485,7 +485,7 @@ Agora você armazenou a chave privada em uma variável GitLab CI / CD, que dispo
 
 Na próxima etapa, você passará a configurar o pipeline de CI / CD.
 
-# Etapa 6 - Configurando o .gitlab-ci.ymlArquivo
+# Etapa 6 - Configurando o .gitlab-ci.yml Arquivo
 
 Você vai configurar o pipeline GitLab CI / CD. O pipeline criará uma imagem Docker e a enviará para o registro do contêiner. 
 
