@@ -538,8 +538,8 @@ Aqui você compõe duas variáveis ​​de ambiente a partir de variáveis ​�
 ```
 CI_REGISTRY_IMAGE: Representa a URL do registro do contêiner vinculado ao projeto específico. 
                    Este URL depende da instância do GitLab. 
-	        			   Por exemplo, URLs de registo para gitlab.com projetos seguem o padrão: 
-				           Mas, como o GitLab fornecerá essa variável, você não precisa saber a URL exata.registry.gitlab.com/your_user/your_project
+	           Por exemplo, URLs de registo para gitlab.com projetos seguem o padrão: 
+		   Mas, como o GitLab fornecerá essa variável, você não precisa saber a URL exata.registry.gitlab.com/your_user/your_project
 
 CI_COMMIT_REF_NAME: O nome do branch ou tag para o qual o projeto é construído.
 
