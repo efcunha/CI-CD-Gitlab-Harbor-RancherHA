@@ -309,7 +309,7 @@ Verifique a instalação verificando o status do serviço:
 ```sh
 systemctl status gitlab-runner 
 ``` 
-Você terá active (running)na saída:
+Você terá active (running) na saída:
 ```     
         Output
        
