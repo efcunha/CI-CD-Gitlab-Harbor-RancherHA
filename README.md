@@ -149,9 +149,11 @@ O pipeline será executado para cada confirmação enviada ao repositório.
 
 Você implantará uma página da web pequena e estática, mas o foco deste tutorial é configurar o pipeline de CD. A página da web estática é apenas para fins de demonstração; você também pode aplicar a mesma configuração de pipeline usando outras imagens do Docker para a implantação.
 
-Ao terminar este tutorial, você pode visitar em um navegador para obter os resultados da implantação automática.http://your_server_IP
+Ao terminar este tutorial, você pode visitar em um navegador para obter os resultados da implantação automática.
 
-Pré-requisitos
+http://your_server_IP
+
+# Pré-requisitos
 
 Para concluir este tutorial, você precisará de:
 
