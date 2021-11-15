@@ -228,11 +228,11 @@ Defina o nome do arquivo como Dockerfilee adicione estas instruções ao corpo d
 FROM nginx:1.18
 COPY index.html /usr/share/nginx/html
 ```
-A FROMinstrução especifica a imagem da qual herdar - neste caso, a nginx:1.18 imagem. 1.18 é a marca da imagem que representa a versão do Nginx.
+A instrução FROM especifica a imagem da qual herdar - neste caso, a nginx:1.18 imagem. 1.18 é a marca da imagem que representa a versão do Nginx.
 
-A nginx:latest tag faz referência à versão mais recente do Nginx, mas isso pode interromper seu aplicativo no futuro, e é por isso que as versões fixas são recomendadas.
+A tag nginx:latest faz referência à versão mais recente do Nginx, mas isso pode interromper seu aplicativo no futuro, e é por isso que as versões fixas são recomendadas.
 
-A COPY instrução copia o index.html arquivo /usr/share/nginx/html na imagem do Docker. 
+A instrução COPY copia o index.html arquivo /usr/share/nginx/html na imagem do Docker. 
 
 Este é o diretório onde o Nginx armazena conteúdo HTML estático.
 
