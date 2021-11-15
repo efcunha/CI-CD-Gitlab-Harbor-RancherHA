@@ -264,11 +264,12 @@ Isso significa que o trabalho de implantação será executado em um executor Gi
 
 Se você usar GitLab Runners desconhecidos (por exemplo, corredores compartilhados) para executar o trabalho de implantação, não perceberá que os sistemas estão entrando em contato com a chave privada. 
 
-Mesmo que os executores do GitLab limpem todos os dados após a execução do trabalho, você pode evitar o envio da chave privada para sistemas desconhecidos registrando seu próprio servidor como um executor do GitLab. A chave privada será então copiada para o servidor controlado por você.
+Mesmo que os executores do GitLab limpem todos os dados após a execução do trabalho, você pode evitar o envio da chave privada para sistemas desconhecidos registrando seu próprio servidor como um executor do GitLab. 
+
+A chave privada será então copiada para o servidor controlado por você.
 
 Comece fazendo login em seu servidor:
 
-Comece fazendo login em seu servidor:
 ```sh
 ssh sammy@your_server_IP 
  ```
