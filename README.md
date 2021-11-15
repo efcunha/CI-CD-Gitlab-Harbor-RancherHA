@@ -347,10 +347,15 @@ sudo gitlab-runner register --url https://gitlab.dominio.com.br/ \
 As opções de comando podem ser interpretadas da seguinte forma:
 ```
 --executa o registercomando de forma não interativa (especificamos todos os parâmetros como opções de comando).
+
 --url é o URL do GitLab que você copiou da página dos corredores no GitLab.
+
 --registration-token é o token que você copiou da página runners no GitLab.
---executoré o tipo de executor. dockerexecuta cada trabalho CI/CD em um contêiner Docker (consulte a documentação do GitLab sobre executores).
+
+--executor é o tipo de executor. docker executa cada trabalho CI/CD em um contêiner Docker (consulte a documentação do GitLab sobre executores).
+
 --description é a descrição do corredor, que aparecerá no GitLab.
+
 --docker-image é a imagem Docker padrão a ser usada em jobs de CI/CD, se não for especificada explicitamente.
 
 --tag-list é uma lista de marcas atribuídas ao corredor. 
@@ -362,7 +367,7 @@ As opções de comando podem ser interpretadas da seguinte forma:
   ERROR: Registering runner... failed                 runner=1Ki1xym3 status=couldn't execute POST against https://gitlab.dominio.com.br/api/v4/runners: Post     https://gitlab.dominio.com.br/api/v4/runners: x509: certificate signed by unknown authority
   PANIC: Failed to register the runner. You may be having network problems.
 
---docker-privilegedexecuta o contêiner Docker criado para cada trabalho de CI/CD no modo privilegiado. 
+--docker-privileged executa o contêiner Docker criado para cada trabalho de CI/CD no modo privilegiado. 
 Um contêiner privilegiado tem acesso a todos os dispositivos na máquina host e tem quase o mesmo acesso ao host que os processos que executam contêineres externos (consulte a documentação do Docker sobre privilégios de tempo de execução e recursos do Linux ). 
 
 O motivo da execução no modo privilegiado é que você pode usar o Docker-in-Docker ( dind ) para criar uma imagem do Docker em seu pipeline de CI/CD. 
