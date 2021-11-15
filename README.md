@@ -1,9 +1,11 @@
 # Gitlab Rancher Kubernetes
 
 ## Contexto
+
 Iremos instalar a versão mais nova do GitLab (Latest).
 
 Para habilitar o recurso AutoDevOps do GitLab, você precisa preencher o formulário "conectando o GitLab a um cluster Kubernetes".
+
 Enquanto escrevo isso, a documentação oficial se concentra na solução de cluster do GKE, portanto, consideramos aqui apenas um cluster existente gerenciado pelo Rancher (que é o meu caso).
 
 O objetivo aqui é fornecer um script para ajudar as pessoas a configurar o cluster existente e preencher os campos obrigatórios do GitLab marcados por (\ *): 
@@ -216,7 +218,7 @@ Este HTML produzirá uma página em branco com um título mostrando Meu site pes
 
 Dockerfiles são receitas usadas pelo Docker para construir imagens do Docker. 
 
-Vamos criar um Dockerfilepara copiar o arquivo HTML em uma imagem Nginx.
+Vamos criar um Dockerfile para copiar o arquivo HTML em uma imagem Nginx.
 
 Volte para a página de visão geral do projeto, clique no botão + e selecione a opção Novo arquivo .
 
