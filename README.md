@@ -143,11 +143,15 @@ GitLab é uma plataforma de colaboração de código aberto que oferece recursos
 
 Você pode rastrear problemas, hospedar pacotes e registros, manter wikis, configurar integração contínua (CI) e pipelines de implantação contínua (CD) e muito mais.
 
-Neste tutorial, você construirá um pipeline de implantação contínua com GitLab. Você vai configurar o pipeline para construir uma imagem Docker, enviá-la para o registro de contêiner GitLab e implantá-la em seu servidor usando SSH. 
+Neste tutorial, você construirá um pipeline de implantação contínua com GitLab. 
+
+Você vai configurar o pipeline para construir uma imagem Docker, enviá-la para o registro de contêiner GitLab e implantá-la em seu servidor usando SSH. 
 
 O pipeline será executado para cada confirmação enviada ao repositório.
 
-Você implantará uma página da web pequena e estática, mas o foco deste tutorial é configurar o pipeline de CD. A página da web estática é apenas para fins de demonstração; você também pode aplicar a mesma configuração de pipeline usando outras imagens do Docker para a implantação.
+Você implantará uma página da web pequena e estática, mas o foco deste tutorial é configurar o pipeline de CD. 
+
+A página da web estática é apenas para fins de demonstração; você também pode aplicar a mesma configuração de pipeline usando outras imagens do Docker para a implantação.
 
 Ao terminar este tutorial, você pode visitar em um navegador para obter os resultados da implantação automática.
 
