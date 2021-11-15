@@ -139,9 +139,13 @@ clusterrolebinding.rbac.authorization.k8s.io/permissive-binding created
 
 # Introdução
 
-GitLab é uma plataforma de colaboração de código aberto que oferece recursos poderosos além de hospedar um repositório de código. Você pode rastrear problemas, hospedar pacotes e registros, manter wikis, configurar integração contínua (CI) e pipelines de implantação contínua (CD) e muito mais.
+GitLab é uma plataforma de colaboração de código aberto que oferece recursos poderosos além de hospedar um repositório de código.
 
-Neste tutorial, você construirá um pipeline de implantação contínua com GitLab. Você vai configurar o pipeline para construir uma imagem Docker, enviá-la para o registro de contêiner GitLab e implantá-la em seu servidor usando SSH. O pipeline será executado para cada confirmação enviada ao repositório.
+Você pode rastrear problemas, hospedar pacotes e registros, manter wikis, configurar integração contínua (CI) e pipelines de implantação contínua (CD) e muito mais.
+
+Neste tutorial, você construirá um pipeline de implantação contínua com GitLab. Você vai configurar o pipeline para construir uma imagem Docker, enviá-la para o registro de contêiner GitLab e implantá-la em seu servidor usando SSH. 
+
+O pipeline será executado para cada confirmação enviada ao repositório.
 
 Você implantará uma página da web pequena e estática, mas o foco deste tutorial é configurar o pipeline de CD. A página da web estática é apenas para fins de demonstração; você também pode aplicar a mesma configuração de pipeline usando outras imagens do Docker para a implantação.
 
@@ -246,9 +250,15 @@ Portanto, a chave privada precisa deixar o sistema em que foi gerada e ser forne
 
 Você nunca quer que sua chave privada entre em um ambiente que não seja controlado ou de sua confiança.
 
-Além do GitLab, o executor GitLab é mais um sistema em que sua chave privada entrará. Para cada pipeline, o GitLab usa runners para realizar o trabalho pesado, ou seja, executar as tarefas que você especificou na configuração do CI / CD. Isso significa que o trabalho de implantação será executado em um executor GitLab, portanto, a chave privada será copiada para o executor de forma que ele possa fazer login no servidor usando SSH.
+Além do GitLab, o executor GitLab é mais um sistema em que sua chave privada entrará. 
 
-Se você usar GitLab Runners desconhecidos (por exemplo, corredores compartilhados ) para executar o trabalho de implantação, não perceberá que os sistemas estão entrando em contato com a chave privada. Mesmo que os executores do GitLab limpem todos os dados após a execução do trabalho, você pode evitar o envio da chave privada para sistemas desconhecidos registrando seu próprio servidor como um executor do GitLab. A chave privada será então copiada para o servidor controlado por você.
+Para cada pipeline, o GitLab usa runners para realizar o trabalho pesado, ou seja, executar as tarefas que você especificou na configuração do CI/CD. 
+
+Isso significa que o trabalho de implantação será executado em um executor GitLab, portanto, a chave privada será copiada para o executor de forma que ele possa fazer login no servidor usando SSH.
+
+Se você usar GitLab Runners desconhecidos (por exemplo, corredores compartilhados) para executar o trabalho de implantação, não perceberá que os sistemas estão entrando em contato com a chave privada. 
+
+Mesmo que os executores do GitLab limpem todos os dados após a execução do trabalho, você pode evitar o envio da chave privada para sistemas desconhecidos registrando seu próprio servidor como um executor do GitLab. A chave privada será então copiada para o servidor controlado por você.
 
 Comece fazendo login em seu servidor:
 
@@ -330,17 +340,25 @@ As opções de comando podem ser interpretadas da seguinte forma:
 --executa o registercomando de forma não interativa (especificamos todos os parâmetros como opções de comando).
 --url é o URL do GitLab que você copiou da página dos corredores no GitLab.
 --registration-token é o token que você copiou da página runners no GitLab.
---executoré o tipo de executor. dockerexecuta cada trabalho CI / CD em um contêiner Docker (consulte a documentação do GitLab sobre executores ).
+--executoré o tipo de executor. dockerexecuta cada trabalho CI/CD em um contêiner Docker (consulte a documentação do GitLab sobre executores).
 --description é a descrição do corredor, que aparecerá no GitLab.
---docker-image é a imagem Docker padrão a ser usada em jobs de CI / CD, se não for especificada explicitamente.
+--docker-image é a imagem Docker padrão a ser usada em jobs de CI/CD, se não for especificada explicitamente.
 --tag-listé uma lista de marcas atribuídas ao corredor. As tags podem ser usadas em uma configuração de pipeline para selecionar executores específicos para um trabalho de CI / CD. A deploymenttag permitirá que você consulte este executor específico para executar o trabalho de implantação.
+
 --tls-ca-file especifica o caminha do certificado ssl do gitlab, para evitar o sequinte erro:
-  ERROR: Registering runner... failed                 runner=1Ki1xym3 status=couldn't execute POST against https://gitlab.dominio.com.br/api/v4/runners: Post https://gitlab.dominio.com.br/api/v4/runners: x509: certificate signed by unknown authority
+
+  ERROR: Registering runner... failed                 runner=1Ki1xym3 status=couldn't execute POST against https://gitlab.dominio.com.br/api/v4/runners: Post     https://gitlab.dominio.com.br/api/v4/runners: x509: certificate signed by unknown authority
   PANIC: Failed to register the runner. You may be having network problems.
---docker-privilegedexecuta o contêiner Docker criado para cada trabalho de CI / CD no modo privilegiado. 
+
+--docker-privilegedexecuta o contêiner Docker criado para cada trabalho de CI/CD no modo privilegiado. 
 Um contêiner privilegiado tem acesso a todos os dispositivos na máquina host e tem quase o mesmo acesso ao host que os processos que executam contêineres externos (consulte a documentação do Docker sobre privilégios de tempo de execução e recursos do Linux ). 
-O motivo da execução no modo privilegiado é que você pode usar o Docker-in-Docker ( dind ) para criar uma imagem do Docker em seu pipeline de CI / CD. É uma boa prática fornecer a um contêiner os requisitos mínimos de que ele precisa. 
+
+O motivo da execução no modo privilegiado é que você pode usar o Docker-in-Docker ( dind ) para criar uma imagem do Docker em seu pipeline de CI/CD. 
+
+É uma boa prática fornecer a um contêiner os requisitos mínimos de que ele precisa. 
+
 Para você, é um requisito executar no modo privilegiado para usar o Docker-in-Docker. 
+
 Esteja ciente de que você registrou o runner apenas para este projeto específico, onde está no controle dos comandos que estão sendo executados no contêiner privilegiado.
 ```
 Depois de executar o gitlab-runner registercomando, você receberá a seguinte saída:
@@ -359,7 +377,7 @@ Na próxima etapa, você criará um usuário de implantação.
 
 Você criará um usuário dedicado à tarefa de implantação. 
 
-Posteriormente, você configurará o pipeline de CI / CD para fazer login no servidor com esse usuário.
+Posteriormente, você configurará o pipeline de CI/CD para fazer login no servidor com esse usuário.
 
 No seu servidor, crie um novo usuário:
 ```sh
@@ -385,7 +403,9 @@ Na próxima etapa, você criará uma chave SSH para poder fazer login no servido
 
 # Etapa 4 - Configurando uma chave SSH
 
-Você vai criar uma chave SSH para o usuário de implantação. Posteriormente, o GitLab CI/CD usará a chave para fazer login no servidor e executar a rotina de implantação.
+Você vai criar uma chave SSH para o usuário de implantação. 
+
+Posteriormente, o GitLab CI/CD usará a chave para fazer login no servidor e executar a rotina de implantação.
 
 Vamos começar mudando para o usuário implantador recém-criado para o qual você gerará a chave SSH:
 ```sh
@@ -397,7 +417,9 @@ Em seguida, gere uma chave SSH de 4096 bits. É importante responder às pergunt
 
 Primeira pergunta: responda com ENTER, que armazena a chave no local padrão (o restante deste tutorial assume que a chave está armazenada no local padrão).
 
-Segunda pergunta: configura uma senha para proteger a chave privada SSH (a chave usada para autenticação). Se você especificar uma senha, terá que inseri-la cada vez que a chave privada for usada. 
+Segunda pergunta: configura uma senha para proteger a chave privada SSH (a chave usada para autenticação). 
+
+Se você especificar uma senha, terá que inseri-la cada vez que a chave privada for usada. 
 
 Em geral, uma frase secreta adiciona outra camada de segurança às chaves SSH, o que é uma boa prática. 
 
@@ -407,7 +429,7 @@ Para resumir, execute o seguinte comando e confirme as duas perguntas com ENTERp
 ```sh
 ssh-keygen -b 4096 
 ```
-Para autorizar a chave SSH para o usuário implantador , você precisa anexar a chave pública ao authorized_keysarquivo:
+Para autorizar a chave SSH para o usuário implantador, você precisa anexar a chave pública ao authorized_keysarquivo:
 ```sh
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys 
 ```
@@ -481,13 +503,13 @@ Clique em Adicionar variável e preencha o formulário da seguinte forma:
 - Proteger variável: verificado
 - Variável de máscara: verificado
 ```
-Agora você armazenou a chave privada em uma variável GitLab CI / CD, que disponibiliza a chave durante a execução do pipeline. 
+Agora você armazenou a chave privada em uma variável GitLab CI/CD, que disponibiliza a chave durante a execução do pipeline. 
 
-Na próxima etapa, você passará a configurar o pipeline de CI / CD.
+Na próxima etapa, você passará a configurar o pipeline de CI/CD.
 
 # Etapa 6 - Configurando o .gitlab-ci.yml Arquivo
 
-Você vai configurar o pipeline GitLab CI / CD. O pipeline criará uma imagem Docker e a enviará para o registro do contêiner. 
+Você vai configurar o pipeline GitLab CI/CD. O pipeline criará uma imagem Docker e a enviará para o registro do contêiner. 
 
 O GitLab fornece um registro de contêiner para cada projeto. 
 
@@ -495,7 +517,9 @@ Você pode explorar o registro do contêiner acessando Pacotes e Registros > Reg
 
 A etapa final do pipeline é fazer login no servidor, obter a imagem Docker mais recente e remover o contêiner antigo e inicie um novo.
 
-Agora você vai criar o .gitlab-ci.ymlarquivo que contém a configuração do pipeline. No GitLab, vá para a página de visão geral do projeto , clique no botão + e selecione Novo arquivo. 
+Agora você vai criar o .gitlab-ci.ymlarquivo que contém a configuração do pipeline. 
+
+No GitLab, vá para a página de visão geral do projeto , clique no botão + e selecione Novo arquivo. 
 
 Em seguida, defina o nome do arquivo como .gitlab-ci.yml.
 
@@ -512,7 +536,9 @@ Cada trabalho é atribuído a um estágio.
 
 Os trabalhos atribuídos ao mesmo estágio são executados em paralelo (se houver corredores suficientes disponíveis). 
 
-As etapas serão executadas na ordem em que foram especificadas. Aqui, o publishestágio vai primeiro e o deploysegundo. 
+As etapas serão executadas na ordem em que foram especificadas. 
+
+Aqui, o publishestágio vai primeiro e o deploysegundo. 
 
 Os estágios sucessivos só começam quando o estágio anterior foi concluído com sucesso (ou seja, todos os trabalhos foram aprovados). 
 
@@ -520,7 +546,7 @@ Os nomes das fases podem ser escolhidos arbitrariamente.
 
 Quando você deseja combinar esta configuração de CD com seu pipeline de CI existente, que testa e constrói o aplicativo, você pode adicionar os estágios publishe deployapós os estágios existentes, de forma que a implantação só ocorra se os testes forem aprovados.
 
-Em seguida, adicione ao seu .gitlab-ci.ymlarquivo:
+Em seguida, adicione ao seu .gitlab-ci.yml arquivo:
 ```
                                                           .gitlab-ci.yml
 ---
@@ -551,11 +577,14 @@ TAG_LATEST irá adicionar a latesttag à imagem. Esta é uma estratégia comum p
 Para cada implantação, a latestimagem será substituída no registro do contêiner pela imagem recém-construída do Docker.
 
 TAG_COMMIT, por outro lado, usa os primeiros oito caracteres do SHA de confirmação sendo implantado como a tag de imagem, criando assim uma imagem Docker exclusiva para cada confirmação. Você poderá rastrear o histórico das imagens do Docker até a granularidade dos commits do Git. 
+
 Esta é uma técnica comum ao fazer implantações contínuas, porque permite que você implante rapidamente uma versão mais antiga do código no caso de uma implantação com defeito.
 ```
 Conforme você explorará nas próximas etapas, o processo de reverter uma implantação para uma revisão Git mais antiga pode ser feito diretamente no GitLab.
 
-$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAMEespecifica o nome da base da imagem Docker. De acordo com a documentação do GitLab , o nome de uma imagem Docker deve seguir este esquema:
+$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAME especifica o nome da base da imagem Docker. 
+
+De acordo com a documentação do GitLab , o nome de uma imagem Docker deve seguir este esquema:
 ```
         image name scheme
        
@@ -568,9 +597,9 @@ registry.example.com/group/project:some-tag
 registry.example.com/group/project/image:latest
 registry.example.com/group/project/my/image:rc1
 ```
-Para sua TAG_COMMIT variável, você usou a segunda opção, onde imageserá substituída pelo nome do ramo.
+Para sua TAG_COMMIT variável, você usou a segunda opção, onde image será substituída pelo nome do ramo.
 
-Em seguida, adicione o seguinte ao seu .gitlab-ci.ymlarquivo:
+Em seguida, adicione o seguinte ao seu .gitlab-ci.yml arquivo:
 ```
                                                       .gitlab-ci.yml
 ---
@@ -585,7 +614,7 @@ publish:
     - docker push $TAG_COMMIT
     - docker push $TAG_LATEST
 ``` 
-A publish seção é o primeiro trabalho em sua configuração de CI / CD. Vamos decompô-lo:
+A publish seção é o primeiro trabalho em sua configuração de CI/CD. Vamos decompô-lo:
 
 image é a imagem Docker a ser usada para este trabalho. 
 
@@ -598,7 +627,7 @@ services especifica Docker-in-Docker -o dind serviço.
 
 Este é o motivo pelo qual você registrou o executor GitLab no modo privilegiado.
 
-A script seção do publishtrabalho especifica os comandos do shell a serem executados para este trabalho. 
+A script seção do publish trabalho especifica os comandos do shell a serem executados para este trabalho. 
 
 O diretório de trabalho será definido como a raiz do repositório quando esses comandos forem executados.
 
@@ -611,7 +640,7 @@ O GitLab gerará o token e permanecerá válido por toda a vida do trabalho.
 
 docker push  ...: Envia ambas as tags de imagem para o registro do contêiner.
 
-Em seguida, adicione o deploytrabalho ao seu .gitlab-ci.yml:
+Em seguida, adicione o deploy ao seu .gitlab-ci.yml:
 ```
                                                .gitlab-ci.yml
 ---
@@ -628,13 +657,15 @@ deploy:
     - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker container rm -f my-app || true"
     - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker run -d -p 80:80 --name my-app $TAG_COMMIT"
 ``` 
-Alpine é uma distribuição Linux leve e é suficiente como uma imagem Docker aqui. Você atribui o trabalho ao deploypalco. 
+Alpine é uma distribuição Linux leve e é suficiente como uma imagem Docker aqui. 
+
+Você atribui o trabalho ao deploy. 
 
 A tag de implantação garante que o trabalho será executado em corredores marcados deployment, como o corredor que você configurou na Etapa 2.
 
 A scriptseção do deploytrabalho começa com dois comandos configurativos:
 ```
-chmod og=$ID_RSA: Revoga todas as permissões para o grupo e outros da chave privada, de forma que apenas o proprietário possa usá-la. 
+chmod og= $ID_RSA: Revoga todas as permissões para o grupo e outros da chave privada, de forma que apenas o proprietário possa usá-la. 
 ```
 Este é um requisito, caso contrário, o SSH se recusa a trabalhar com a chave privada.
 ```sh
@@ -650,7 +681,7 @@ O padrão para cada um é:
        
 ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "command"
 ```
-Em cada sshinstrução que você está executando commandno servidor remoto. 
+Em cada ssh instrução que você está executando commandno servidor remoto. 
 
 Para fazer isso, você se autentica com sua chave privada.
 
@@ -703,7 +734,9 @@ deploy:
   only:
     - master
 ``` 
-Os ambientes GitLab permitem que você controle as implantações dentro do GitLab. Você pode examinar os ambientes em seu projeto GitLab acessando Operações> Ambientes . 
+Os ambientes GitLab permitem que você controle as implantações dentro do GitLab. 
+
+Você pode examinar os ambientes em seu projeto GitLab acessando Operações> Ambientes . 
 
 Se o pipeline ainda não foi concluído, não haverá ambiente disponível, pois nenhuma implantação ocorreu até o momento.
 
@@ -727,7 +760,7 @@ Aqui você deseja executar o trabalho de implantação masterapenas para a filia
 
 Para definir regras mais complexas sobre se um trabalho deve ser executado ou não, dê uma olhada na sintaxe das regras .
 
-Observação: em outubro de 2020, o GitHub mudou sua convenção de nomenclatura para o branch padrão de masterpara main. 
+Observação: em outubro de 2020, o GitHub mudou sua convenção de nomenclatura para o branch padrão de master para main. 
 
 Outros provedores, como o GitLab e a comunidade de desenvolvedores em geral, estão começando a seguir essa abordagem. 
 
@@ -774,9 +807,13 @@ deploy:
   only:
     - master
 ``` 
-Por fim, clique em Commit changes na parte inferior da página no GitLab para criar o .gitlab-ci.ymlarquivo. Como alternativa, quando você clonar o repositório Git localmente, envie e envie o arquivo para o remoto.
+Por fim, clique em Commit changes na parte inferior da página no GitLab para criar o .gitlab-ci.ymlarquivo. 
 
-Você criou uma configuração GitLab CI / CD para construir uma imagem Docker e implantá-la em seu servidor. Na próxima etapa, você está validando a implantação.
+Como alternativa, quando você clonar o repositório Git localmente, envie e envie o arquivo para o remoto.
+
+Você criou uma configuração GitLab CI/CD para construir uma imagem Docker e implantá-la em seu servidor. 
+
+Na próxima etapa, você está validando a implantação.
 
 # Etapa 7 - Validando a implantação
 
@@ -784,17 +821,19 @@ Agora você validará a implantação em vários locais do GitLab, bem como em s
 
 Quando um .gitlab-ci.ymlarquivo é enviado ao repositório, o GitLab o detecta automaticamente e inicia um pipeline de CI / CD. 
 
-No momento em que você criou o .gitlab-ci.ymlarquivo, o GitLab iniciou o primeiro pipeline.
+No momento em que você criou o .gitlab-ci.yml arquivo, o GitLab iniciou o primeiro pipeline.
 
 Acesse CI/CD > Pipelines em seu projeto GitLab para ver o status do pipeline. 
 
-Se os trabalhos ainda estiverem em execução / pendentes, espere até que sejam concluídos. 
+Se os trabalhos ainda estiverem em execução/pendentes, espere até que sejam concluídos. 
 
 Você verá um pipeline Aprovado com duas marcas de seleção verdes, indicando que o trabalho de publicação e implantação foi executado com êxito.
 
 A página de visão geral do pipeline mostrando um pipeline aprovado
 
-Vamos examinar o pipeline. Clique no botão aprovado na coluna Status para abrir a página de visão geral do pipeline. 
+Vamos examinar o pipeline. 
+
+Clique no botão aprovado na coluna Status para abrir a página de visão geral do pipeline. 
 
 Você obterá uma visão geral das informações gerais, como:
 
@@ -846,7 +885,7 @@ O intervalo de expiração geralmente é definido como algo alto, como 90 dias.
 
 Mas quando você se depara com o caso de tentar implantar uma imagem que foi removida do registro devido à política de expiração, você pode resolver o problema executando novamente a publicação trabalho desse pipeline específico também, que recriará e enviará a imagem para o commit fornecido ao registro.
 
-Em seguida, clique no botão Exibir implantação , que será aberto em um navegador e você deverá ver o título Meu site pessoal .http://your_server_IP
+Em seguida, clique no botão Exibir implantação, que será aberto em um navegador e você deverá ver o título Meu site pessoal .http://your_server_IP
 
 Por fim, queremos verificar o contêiner implantado em seu servidor. 
 
@@ -897,7 +936,7 @@ Salve as alterações clicando em Confirmar alterações na parte inferior da p�
 
 Um novo pipeline será criado para implantar as mudanças. 
 
-No GitLab, vá para CI/CD> Pipelines. 
+No GitLab, vá para CI/CD > Pipelines. 
 
 Quando o pipeline for concluído, você pode abrir em um navegador a página da web atualizada que agora mostra Meu site pessoal aprimorado em vez de Meu site pessoal .http://your_server_IP
 
