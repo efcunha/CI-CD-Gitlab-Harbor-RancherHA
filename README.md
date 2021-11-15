@@ -352,7 +352,10 @@ As opções de comando podem ser interpretadas da seguinte forma:
 --executoré o tipo de executor. dockerexecuta cada trabalho CI/CD em um contêiner Docker (consulte a documentação do GitLab sobre executores).
 --description é a descrição do corredor, que aparecerá no GitLab.
 --docker-image é a imagem Docker padrão a ser usada em jobs de CI/CD, se não for especificada explicitamente.
---tag-listé uma lista de marcas atribuídas ao corredor. As tags podem ser usadas em uma configuração de pipeline para selecionar executores específicos para um trabalho de CI / CD. A deploymenttag permitirá que você consulte este executor específico para executar o trabalho de implantação.
+
+--tag-list é uma lista de marcas atribuídas ao corredor. 
+  As tags podem ser usadas em uma configuração de pipeline para selecionar executores específicos para um trabalho de CI/CD. 
+  A deploymenttag permitirá que você consulte este executor específico para executar o trabalho de implantação.
 
 --tls-ca-file especifica o caminha do certificado ssl do gitlab, para evitar o sequinte erro:
 
