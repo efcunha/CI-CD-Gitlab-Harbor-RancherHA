@@ -36,7 +36,7 @@ O objetivo aqui é fornecer um script para ajudar as pessoas a configurar o clus
 
 # Setup
 
-3 VM Ubuntu 18.04 with Docker installed
+4 VM Ubuntu 18.04 with Docker installed
 
 - worker01 172.16.0.27 : Rancher server stable 2.6.x, nfs server (for persistence volume claim)
 - worker02 172.16.0.28 : Rancher server stable 2.6.x, nfs server (for persistence volume claim)
