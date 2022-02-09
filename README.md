@@ -693,8 +693,9 @@ docker build ...: Constrói a imagem Docker com base no Dockerfilee marca-a com 
 docker login ...: Registra o Docker no registro de contêiner do projeto. 
 ``` 
 Você usa a variável predefinida 
-
+``` 
 $CI_BUILD_TOKEN como um token de autenticação. 
+``` 
 
 O GitLab gerará o token e permanecerá válido por toda a vida do trabalho.
 ``` 
@@ -757,7 +758,7 @@ Para fazer isso, você se autentica com sua chave privada.
 As opções são as seguintes:
 
 ```
--i significa arquivo de identidade e $ID_RSAé a variável GitLab que contém o caminho para o arquivo de chave privada.
+-i significa arquivo de identidade e $ID_RSA é a variável GitLab que contém o caminho para o arquivo de chave privada.
 -o StrictHostKeyChecking=no certifique-se de ignorar a questão, se você confia ou não no host remoto. 
 ```
 
@@ -889,7 +890,7 @@ deploy:
 
 Por fim, clique em Commit changes na parte inferior da página no GitLab para criar o arquivo .gitlab-ci.yml. 
 
-Como alternativa, quando você clonar o repositório Git localmente, envie e envie o arquivo para o remoto.
+Como alternativa, quando você clonar o repositório Git localmente.
 
 Você criou uma configuração GitLab CI/CD para construir uma imagem Docker e implantá-la em seu servidor. 
 
