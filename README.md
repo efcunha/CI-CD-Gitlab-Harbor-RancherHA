@@ -156,8 +156,9 @@ Você implantará uma página da web pequena e estática, mas o foco deste tutor
 A página da web estática é apenas para fins de demonstração; você também pode aplicar a mesma configuração de pipeline usando outras imagens do Docker para a implantação.
 
 Ao terminar este tutorial, você pode visitar em um navegador para obter os resultados da implantação automática.
-
+```
 http://your_server_IP
+```
 
 # Pré-requisitos
 
