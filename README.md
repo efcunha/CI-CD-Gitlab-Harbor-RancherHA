@@ -1033,8 +1033,10 @@ Um novo pipeline será criado para implantar as mudanças.
 
 No GitLab, vá para CI/CD > Pipelines. 
 
-Quando o pipeline for concluído, você pode abrir em um navegador a página da web atualizada que agora mostra Meu site pessoal aprimorado em vez de Meu site pessoal .http://your_server_IP
-
+Quando o pipeline for concluído, você pode abrir em um navegador a página da web atualizada que agora mostra Meu site pessoal aprimorado em vez de Meu site pessoal.
+```
+http://your_server_IP
+```
 Ao passar para Operações > Ambientes > produção, você verá a implantação recém-criada. 
 
 Agora clique no botão reimplantar da implantação inicial mais antiga:
