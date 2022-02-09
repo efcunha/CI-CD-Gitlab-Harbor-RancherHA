@@ -687,14 +687,19 @@ A script seção do publish trabalho especifica os comandos do shell a serem exe
 
 O diretório de trabalho será definido como a raiz do repositório quando esses comandos forem executados.
 
+``` 
 docker build ...: Constrói a imagem Docker com base no Dockerfilee marca-a com a última marca de confirmação definida na seção de variáveis.
-docker login ...: Registra o Docker no registro de contêiner do projeto. 
 
-Você usa a variável predefinida $CI_BUILD_TOKEN como um token de autenticação. 
+docker login ...: Registra o Docker no registro de contêiner do projeto. 
+``` 
+Você usa a variável predefinida 
+
+$CI_BUILD_TOKEN como um token de autenticação. 
 
 O GitLab gerará o token e permanecerá válido por toda a vida do trabalho.
-
+``` 
 docker push  ...: Envia ambas as tags de imagem para o registro do contêiner.
+``` 
 
 Em seguida, adicione o deploy ao seu .gitlab-ci.yml:
 
