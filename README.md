@@ -618,7 +618,7 @@ CI_COMMIT_SHORT_SHA: Os primeiros oito caracteres da revisão de commit para a q
 Ambas as variáveis ​​são compostas por variáveis ​​predefinidas e serão usadas para marcar a imagem do Docker.
 
 ```
-TAG_LATEST irá adicionar a latesttag à imagem. 
+TAG_LATEST irá adicionar a latest tag à imagem. 
            Esta é uma estratégia comum para fornecer uma tag que sempre representa a versão mais recente. 
            Para cada implantação, a latestimagem será substituída no registro do contêiner pela imagem recém-construída do Docker.
 
@@ -639,8 +639,9 @@ De acordo com a documentação do GitLab, o nome de uma imagem Docker deve segui
         image name scheme
        
 <registry URL>/<namespace>/<project>/<image>
+
 $CI_REGISTRY_IMAGE representa a <registry URL>/<namespace>/<project> parte e é obrigatório porque é a raiz do registro do projeto. 
-$CI_COMMIT_REF_NAMEé opcional, mas útil para hospedar imagens Docker para diferentes branches. 
+$CI_COMMIT_REF_NAME é opcional, mas útil para hospedar imagens Docker para diferentes branches. 
 
 Neste tutorial, você trabalhará apenas com um branch, mas é bom construir uma estrutura extensível. 
 Em geral, existem três níveis de nomes de repositório de imagem suportados pelo GitLab:
@@ -670,16 +671,20 @@ publish:
     - docker push $TAG_LATEST
 ``` 
 
-A publish seção é o primeiro trabalho em sua configuração de CI/CD. Vamos decompô-lo:
+A publish seção é o primeiro trabalho em sua configuração de CI/CD. 
+
+Vamos explora-lo:
 
 image é a imagem Docker a ser usada para este trabalho. 
 
 O executor GitLab criará um contêiner do Docker para cada trabalho e executará o script dentro desse contêiner. 
-
+``` 
 docker:latest imagem garante que o docker comando estará disponível.
 
 stage atribui o trabalho ao publish palco.
+
 services especifica Docker-in-Docker -o dind serviço. 
+``` 
 
 Este é o motivo pelo qual você registrou o executor GitLab no modo privilegiado.
 
@@ -692,6 +697,7 @@ docker build ...: Constrói a imagem Docker com base no Dockerfilee marca-a com 
 
 docker login ...: Registra o Docker no registro de contêiner do projeto. 
 ``` 
+
 Você usa a variável predefinida 
 ``` 
 $CI_BUILD_TOKEN como um token de autenticação. 
@@ -751,7 +757,7 @@ O padrão para cada um é:
 ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "command"
 ```
 
-Em cada ssh instrução que você está executando commandno servidor remoto. 
+Em cada instrução ssh que você está executando um comando no servidor remoto. 
 
 Para fazer isso, você se autentica com sua chave privada.
 
@@ -770,28 +776,31 @@ $SERVER_USER e $SERVER_IP são as variáveis ​​do GitLab que você criou na 
 
 Eles especificam o host remoto e o usuário de login para a conexão SSH.
 
-command será executado no host remoto.
+O comando será executado no host remoto.
 
 Em última análise, a implantação ocorre executando estes quatro comandos em seu servidor:
 
 ```
 docker login        ...: Registra o Docker no registro do contêiner.
+
 docker pull         ...: Extrai a imagem mais recente do registro do contêiner.
+
 docker container rm ...: Exclui o contêiner existente, se houver. || true garante que o código de saída seja sempre bem-sucedido, 
                          mesmo se não houver nenhum contêiner em execução com o nome my-app. 
                          Isso garante uma rotina de exclusão se existe sem quebrar o pipeline quando o contêiner não existe (por exemplo, para a primeira implantação).
+
 docker run          ...: Inicia um novo contêiner usando a imagem mais recente do registro. 
 ```
 
 O contêiner será nomeado my-app. 
 
-A porta 80 no host será vinculada à porta 80 do contêiner (o pedido é -p host:container). -d inicia o contêiner no modo desanexado, caso contrário, o pipeline ficaria preso esperando o comando terminar.
+A porta 80 no host será vinculada à porta 80 do contêiner (o pedido é -p host:container), -d inicia o contêiner no modo desanexado, caso contrário, o pipeline ficaria preso esperando o comando terminar.
 
 Observação: pode parecer estranho usar SSH para executar esses comandos em seu servidor, considerando que o executor GitLab que executa os comandos é exatamente o mesmo servidor. 
 
 Ainda assim, é necessário, porque o executor executa os comandos em um contêiner Docker, portanto, você implantaria dentro do contêiner em vez do servidor se executasse os comandos sem o uso de SSH. 
 
-Alguém poderia argumentar que, em vez de usar o Docker como um executor runner, você poderia usar o executor do shellpara executar os comandos no próprio host. 
+Alguém poderia argumentar que, em vez de usar o Docker como um executor runner, você poderia usar o executor do shell para executar os comandos no próprio host. 
 
 Mas, isso criaria uma restrição para o pipeline, ou seja, o executor deve ser o mesmo servidor que você deseja implantar. 
 
@@ -819,7 +828,7 @@ Você pode examinar os ambientes em seu projeto GitLab acessando Operações > A
 
 Se o pipeline ainda não foi concluído, não haverá ambiente disponível, pois nenhuma implantação ocorreu até o momento.
 
-Quando um trabalho de pipeline define uma environmentseção, o GitLab cria uma implantação para o ambiente fornecido (aqui production) cada vez que o trabalho é concluído com sucesso. 
+Quando um trabalho de pipeline define uma environment seção, o GitLab cria uma implantação para o ambiente fornecido (aqui production) cada vez que o trabalho é concluído com sucesso. 
 
 Isso permite que você rastreie todas as implantações criadas pelo GitLab CI/CD. 
 
@@ -843,7 +852,7 @@ Observação: em outubro de 2020, o GitHub mudou sua convenção de nomenclatura
 
 Outros provedores, como o GitLab e a comunidade de desenvolvedores em geral, estão começando a seguir essa abordagem. 
 
-O termo masterbranch é usado neste tutorial para denotar o branch padrão para o qual você pode ter um nome diferente.
+O termo master branch é usado neste tutorial para denotar o branch padrão para o qual você pode ter um nome diferente.
 
 Seu .gitlab-ci.yml arquivo completo terá a seguinte aparência:
 
@@ -900,7 +909,7 @@ Na próxima etapa, você está validando a implantação.
 
 Agora você validará a implantação em vários locais do GitLab, bem como em seu servidor e em um navegador.
 
-Quando um arquivo .gitlab-ci.yml é enviado ao repositório, o GitLab o detecta automaticamente e inicia um pipeline de CI / CD. 
+Quando um arquivo .gitlab-ci.yml é enviado ao repositório, o GitLab o detecta automaticamente e inicia um pipeline de CI/CD. 
 
 No momento em que você criou o arquivo .gitlab-ci.yml, o GitLab iniciou o primeiro pipeline.
 
