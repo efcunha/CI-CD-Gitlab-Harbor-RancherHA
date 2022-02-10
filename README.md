@@ -98,7 +98,7 @@ gitlab_rails['ldap_group_sync_worker_cron'] = "0 * * * *"
 
 # Examplo
 ```
-ubuntu@DESKTOP-9LDMSRO:~/Gitlab-Rancher-Kubernetes/k8s$ ./autodevops.sh
+ubuntu@DESKTOP-9LDMSRO:~/Gitlab-Rancher-Kubernetes/Integrar Kubernetes cluster$ ./autodevops.sh
 #-----------------------
 kubectl check configuration
 #-----------------------
