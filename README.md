@@ -1086,7 +1086,32 @@ Altere para:
 
 registry_external_url 'https://gitlab.example.com:5005'
 ```
-	
+
+3 - Arrumando o docker login:
+
+```
+# Editar para conectar no registro inseguro:
+
+$ vi /etc/docker/daemon.json
+{
+	"insecure-registries" : ["gitlab.dominio.com.br:5005"]
+}
+
+$ systemctl restart docker
+
+$ docker login gitlab.dominio.com.br:5005
+Username: root
+Password:
+WARNING! Your password will be stored unencrypted in /home/ubuntu/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+
+$ docker build -t gitlab.example.com:4567/foo/bar:latest .
+$ docker push gitlab.example.com:4567/foo/bar:latest
+```
+
 Vamos resumir o que você conseguiu ao longo deste tutorial.
 
 # Conclusão
