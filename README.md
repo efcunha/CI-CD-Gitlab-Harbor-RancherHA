@@ -489,7 +489,7 @@ Copie a saída para sua área de transferência.
 Certifique-se de adicionar uma quebra de linha após -----END RSA PRIVATE KEY-----:
 
 ```
-~ / .ssh / id_rsa
+~ /.ssh/id_rsa
 -----BEGIN RSA PRIVATE KEY-----
 ...
 -----END RSA PRIVATE KEY-----
