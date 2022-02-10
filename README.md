@@ -1063,7 +1063,20 @@ http://your_server_IP
 ```
 # Erros de configuração:
 
-error parsing HTTP 404 response body: invalid character '<' looking for beginning of value: "<!DOCTYPE html>\n<html>\n<head>\n  <meta content=\"width=device-width, initial-scale=1, maximum-scale=1\
+1 - How to fix Gitlab CI error during connect: Post http://docker:2375/v1.40/auth: dial tcp: lookup docker on … no such host
+
+```
+Altere o arquivo config.toml:
+
+sudo vi /etc/gitlab-runner/config.toml
+
+Onde existir [runners.docker], altere as sequintes linhas:
+
+privileged = true
+volumes = ["/cache", "/var/run/docker.sock:/var/run/docker.sock"]
+```
+
+2 - error parsing HTTP 404 response body: invalid character '<' looking for beginning of value:
 
 Caso vc esteja utilizando a mesma URL do gitlab no registry_external_url	
 ```
