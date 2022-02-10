@@ -1061,7 +1061,19 @@ Aguarde a conclusão do trabalho e abra em um navegador, onde verá o título in
 ```
 http://your_server_IP
 ```
+# Erros de configuração:
 
+error parsing HTTP 404 response body: invalid character '<' looking for beginning of value: "<!DOCTYPE html>\n<html>\n<head>\n  <meta content=\"width=device-width, initial-scale=1, maximum-scale=1\
+
+Caso vc esteja utilizando a mesma URL do gitlab no registry_external_url	
+```
+registry_external_url 'https://gitlab.example.com'
+
+Altere para:
+
+registry_external_url 'https://gitlab.example.com:5005'
+```
+	
 Vamos resumir o que você conseguiu ao longo deste tutorial.
 
 # Conclusão
