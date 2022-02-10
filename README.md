@@ -112,8 +112,6 @@ Get CA Certificate
 -----BEGIN CERTIFICATE-----
 MIIC4TCCAcmgAwIBAgIBADANBgkqhkiG9w0BAQsFADASMRAwDgYDVQQDEwdrdWJl
 LWNhMB4XDTIxMTAxNTIyMjYxOFoXDTMxMTAxMzIyMjYxOFowEjEQMA4GA1UEAxMH
-a3ViZS1jYTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAM/RFBWwU7OE
-y7D6SHbdMSdZ8pVAJ5WtKZNGvvLvZv9w4GeyUN6T9BszaVCAKrPC9/7G+7rbTlrk
 90MxeY7jenMqHRiF0GDGorfl1jngavaMIM6fqQKuw2/P9lHYFanUMGN3ga7sLSKw
 4M89l4OoXIX82w5D3wQVpANvE/1X
 -----END CERTIFICATE-----
@@ -132,7 +130,6 @@ ca.crt:     1058 bytes
 namespace:  11 bytes
 token:      iNDdkNDYxZGMtYmYxMi00NTRmLWFjNDMtMzdhNmJkNzg2YTYyIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmdpdGxhYiJ9.qJdS-
 irjtnP9Z4r3shgZ5OxgSYkwdPpF-BIcbakAN7KiNJFdP7E6NVbague1DRdxrC2WKig669-rGabarSAIdvNfUisKDx1oaaPUqSoNj9Utk93h_J0tlhP9-JLVdfCL3Fboz
-GdQo2ieY_Y962Ba-XTJJ45yh1G3WVBZ7kCg9tb_C6KAuilUa4OdPDx06YwGhAeFA_BO7_gZdTb50NsUnxHsa0v3qpceoqa4kBp5ab16LRz-sZlTJzYyiHf7MlTRbl13ldzda91TfWKiRIojyRw6K_BxMQ
 #-----------------------
 clusterrolebinding.rbac.authorization.k8s.io/permissive-binding created
 ```
